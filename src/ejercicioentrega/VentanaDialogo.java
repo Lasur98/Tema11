@@ -14,30 +14,30 @@ import javax.swing.JPanel;
 public class VentanaDialogo extends JDialog{
 	
 	private JLabel lblelegir;
-	private JComboBox ciclos;
+	private JComboBox circuitos;
 	private JButton elegir;
-	private DefaultComboBoxModel comboCiclos;
-	private GestorCiclos gc;
-	private String curso;
+	private DefaultComboBoxModel comboCircuitos;
+	private GestorCircuitos gc;
+	private String circuito;
 	
 	public VentanaDialogo()
 	{
-		setTitle("Ciclos");
+		setTitle("Circuitos");
 		setModal(true);
-		gc=new GestorCiclos();
+		gc=new GestorCircuitos();
 		
 		//panelNorte
 		JPanel panelNorte=new JPanel();
-		lblelegir=new JLabel("Elige ciclo");
+		lblelegir=new JLabel("Elige circuito a alquilar: ");
 		panelNorte.add(lblelegir);
 		this.getContentPane().add(panelNorte, "North");
 		
 		//panel Centro
 		JPanel panelCentro=new JPanel();
-		comboCiclos=cargarCombo();
-		ciclos=new JComboBox(comboCiclos);
+		comboCircuitos=cargarCombo();
+		circuitos=new JComboBox(comboCircuitos);
 		
-		panelCentro.add(ciclos);
+		panelCentro.add(circuitos);
 		this.getContentPane().add(panelCentro, "Center");
 		
 		//Panel Sur
@@ -59,7 +59,7 @@ public class VentanaDialogo extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				curso=(String) comboCiclos.getSelectedItem();
+				circuito=(String) comboCircuitos.getSelectedItem();
 				setVisible(false);
 				
 			}
@@ -68,13 +68,13 @@ public class VentanaDialogo extends JDialog{
 	}
 
 	public String getCurso() {
-		return curso;
+		return circuito;
 	}
 
 	private DefaultComboBoxModel cargarCombo() {
 		
 		DefaultComboBoxModel ciclos=new DefaultComboBoxModel();
-		ArrayList nomCiclos=gc.nombresCiclos();
+		ArrayList nomCiclos=gc.nombresCircuitos();
 		for(int i=0;i<nomCiclos.size();i++)
 		{
 			ciclos.addElement(nomCiclos.get(i));
