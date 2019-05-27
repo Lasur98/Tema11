@@ -19,6 +19,7 @@ public class VentanaDialogo extends JDialog{
 	private DefaultComboBoxModel comboCircuitos;
 	private GestorCircuitos gc;
 	private String circuito;
+	private String id_circuito;
 	
 	public VentanaDialogo()
 	{
@@ -60,6 +61,7 @@ public class VentanaDialogo extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				circuito=(String) comboCircuitos.getSelectedItem();
+				id_circuito=gc.idCircuito(circuito);
 				setVisible(false);
 				
 			}
@@ -67,7 +69,12 @@ public class VentanaDialogo extends JDialog{
 		
 	}
 
-	public String getCurso() {
+	
+	public String getId_circuito() {
+		return id_circuito;
+	}
+
+	public String getCircuito() {
 		return circuito;
 	}
 

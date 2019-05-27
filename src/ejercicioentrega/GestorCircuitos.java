@@ -65,13 +65,35 @@ public class GestorCircuitos {
 		
 	}
 	
-	public ArrayList reservaCircuito(String circuito)
+	public String idCircuito(String nombreCircuito)
+	{
+		String id_circuito="";
+		try 
+		{
+			Statement st=cn.createStatement();
+			String sql="select id_circuito from circuitos where nombre='"+nombreCircuito+"';";
+			ResultSet rs=st.executeQuery(sql);
+			
+			if (rs.next())
+				id_circuito=rs.getString("id_circuito");
+			
+			rs.close();
+			st.close();
+		} 
+		catch (SQLException e) 
+		{
+			System.err.println("Error SQL "+e.getMessage());
+		}
+		return id_circuito;
+	}
+	
+	public ArrayList reservaCircuito(String id_circuito)
 	{
 		ArrayList pilotos=new ArrayList();
 		try 
 		{
 			Statement st=cn.createStatement();
-			String sql="select fecha,hora,nombre from circuito_piloto;";
+			String sql="select fecha,hora,nombre from circuito_piloto where id_circuito='"+id_circuito+"';";
 			ResultSet rs=st.executeQuery(sql);
 			
 			while(rs.next())
@@ -96,7 +118,9 @@ public class GestorCircuitos {
 	
 	public static void main(String[] args) {
 		
-	
+		/*GestorCircuitos gc=new GestorCircuitos();
+		//System.out.println(gc.idCircuito("Catalunya"));
+		System.out.println(gc.reservaCircuito(gc.idCircuito("Catalunya")));*/
 		
 	}
 
