@@ -115,6 +115,22 @@ public class GestorCircuitos {
 		return pilotos;
 	}
 	
+	public void anyadirPiloto(String id_circuito,String nombre,String dni,String hora,String fecha)
+	{
+		try 
+		{
+			Statement st=cn.createStatement();
+			String sql="insert into circuito_piloto ('id_circuito','dni','nombre','fecha','hora') values"
+					+ " ('"+id_circuito+"','"+dni+"','"+nombre+"','"+fecha+"','"+hora+"');";
+			st.executeUpdate(sql);
+			
+			st.close();
+		} 
+		catch (SQLException e) 
+		{
+			System.err.println("Error SQL "+e.getMessage());
+		}
+	}
 	
 	public static void main(String[] args) {
 		

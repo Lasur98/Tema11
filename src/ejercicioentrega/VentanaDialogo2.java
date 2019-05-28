@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class VentanaDialogo2 extends JDialog{
@@ -14,9 +15,13 @@ public class VentanaDialogo2 extends JDialog{
 	private JTextField txtNombre,txtDni,txtHora,txtDiaMes;
 	private VentanaDialogo vd;
 	private JButton anyadir;
+	private GestorCircuitos gc;
+	private String id_circuito;
 
-	public VentanaDialogo2(String hora,String fecha)
+	public VentanaDialogo2(String id_circuito,String hora,String fecha)
 	{
+		gc=new GestorCircuitos();
+		this.id_circuito=id_circuito;
 		setTitle("Añadir reserva");
 		setModal(true);
 		setLayout(null);
@@ -68,7 +73,9 @@ public class VentanaDialogo2 extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
+				gc.anyadirPiloto(id_circuito, txtNombre.getText(), txtDni.getText(), txtHora.getText(), txtDiaMes.getText());
+				JOptionPane.showMessageDialog(null, "La reserva se ha añadido correctamente");
 				
 			}
 		});

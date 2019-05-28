@@ -132,7 +132,7 @@ public class VentanaPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String hora=horas.getSelectedItem().toString()+":"+minutos.getSelectedItem().toString();
 				String diaMes="2019-"+fechaMes.getSelectedItem().toString()+"-"+fechaDia.getSelectedItem().toString();
-				new VentanaDialogo2(hora,diaMes);
+				new VentanaDialogo2(vd.getId_circuito(),hora,diaMes);
 				
 			}
 		});
