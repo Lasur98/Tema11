@@ -95,30 +95,8 @@ public class VentanaPrincipal extends JFrame{
 				lblHora.setVisible(true);
 				horas.setVisible(true);
 				minutos.setVisible(true);
-				//Comprobamos el dia y mes de la lista de pilotos que alquilan el circuito
-				ArrayList pilotosCircuito=gc.reservaCircuito(vd.getId_circuito());
-				String[] pilotosCircui=new String[pilotosCircuito.size()];
-				boolean enFecha=true;
-				for(int i=0;i<pilotosCircuito.size();i++)
-				{
-					CircuitoPiloto cp=(CircuitoPiloto) pilotosCircuito.get(i);
-					String[] fecha=cp.getFecha().split("-");
-					String mes=mesANumero(fechaMes.getSelectedItem().toString());
-					if(fecha[1].equals(mes) && fecha[2].equals(fechaDia.getSelectedItem().toString()))
-					{
-						pilotosCircui[i]=cp.toString();
-					}
-					else
-						enFecha=false;
-						
-				}
-				if(enFecha==true)
-				{
-					pilotos.setListData(pilotosCircui);
-					pilotos.setVisible(true);
-				}
-				else
-					pilotos.setVisible(false);
+				//Comprobamos el dia y mes de la lista de pilotos que alquilan el circuito con el metodo sacarLista
+				sacarLista();
 				anyadirPiloto.setVisible(true);
 				revalidate();
 				repaint();
@@ -131,8 +109,9 @@ public class VentanaPrincipal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String hora=horas.getSelectedItem().toString()+":"+minutos.getSelectedItem().toString();
-				String diaMes="2019-"+fechaMes.getSelectedItem().toString()+"-"+fechaDia.getSelectedItem().toString();
+				String diaMes="2019-"+mesANumero(fechaMes.getSelectedItem().toString())+"-"+fechaDia.getSelectedItem().toString();
 				new VentanaDialogo2(vd.getId_circuito(),hora,diaMes);
+				sacarLista();
 				
 			}
 		});
@@ -200,6 +179,34 @@ public class VentanaPrincipal extends JFrame{
 	
 	
 	
+	private void sacarLista() {
+		ArrayList pilotosCircuito=gc.reservaCircuito(vd.getId_circuito());
+		String[] pilotosCircui=new String[pilotosCircuito.size()];
+		boolean enFecha=true;
+		for(int i=0;i<pilotosCircuito.size();i++)
+		{
+			CircuitoPiloto cp=(CircuitoPiloto) pilotosCircuito.get(i);
+			String[] fecha=cp.getFecha().split("-");
+			String mes=mesANumero(fechaMes.getSelectedItem().toString());
+			if(fecha[1].equals(mes) && fecha[2].equals(fechaDia.getSelectedItem().toString()))
+			{
+				pilotosCircui[i]=cp.toString();
+			}
+			else
+				enFecha=false;
+				
+		}
+		if(enFecha==true)
+		{
+			pilotos.setListData(pilotosCircui);
+			pilotos.setVisible(true);
+		}
+		else
+			pilotos.setVisible(false);
+	}
+
+
+
 	public static void main(String[] args) {
 		
 		new VentanaPrincipal();

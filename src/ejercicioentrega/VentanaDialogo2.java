@@ -74,8 +74,14 @@ public class VentanaDialogo2 extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				gc.anyadirPiloto(id_circuito, txtNombre.getText(), txtDni.getText(), txtHora.getText(), txtDiaMes.getText());
+				String nombre=txtNombre.getText();
+				String dni=txtDni.getText();
+				String hora=txtHora.getText();
+				String fecha=txtDiaMes.getText();
+				
+				gc.anyadirPiloto(id_circuito,nombre,dni, hora, fecha);
 				JOptionPane.showMessageDialog(null, "La reserva se ha añadido correctamente");
+				setVisible(false);
 				
 			}
 		});

@@ -120,8 +120,8 @@ public class GestorCircuitos {
 		try 
 		{
 			Statement st=cn.createStatement();
-			String sql="insert into circuito_piloto ('id_circuito','dni','nombre','fecha','hora') values"
-					+ " ('"+id_circuito+"','"+dni+"','"+nombre+"','"+fecha+"','"+hora+"');";
+			String sql="insert into circuito_piloto (id_circuito,dni,fecha,hora,nombre) values"
+					+ " ('"+id_circuito+"','"+dni+"','"+fecha+"','"+hora+"','"+nombre+"');";
 			st.executeUpdate(sql);
 			
 			st.close();
